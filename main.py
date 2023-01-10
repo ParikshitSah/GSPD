@@ -8,7 +8,7 @@ def test_eight_components():
 
     driver.get("https://gspd.gosignmeup.com/Public/Course/Browse")
 
-    Finder = driver.find_element(By.CLASS_NAME, "Welcome")
+    Finder = driver.find_element(By.ID, 'layout-welcomeuser')
     print(Finder.text)
 
     driver.quit()
