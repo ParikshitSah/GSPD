@@ -21,6 +21,23 @@ def main():
     Pass = Form.find_element(By.NAME, 'pass').send_keys(
         os.environ.get('Password_GSMU') + Keys.ENTER)
 
+    #Temporary Method to get names
+
+    driver.get("https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=3786&coursetype=0")
+
+    # Getting First Names
+    # Table > tbody > tr > td > a (First Name)
+    Table = driver.find_elements(By.TAG_NAME, "table")
+    
+    
+
+    for i in Table:
+        Names = i.find_elements(By.TAG_NAME, "a")
+        for e in Names:
+            print(e.text)
+
+    # Body = Table.find_element(By.TAG_NAME, "tbody")
+    # Tr = Body.find_element(By.TAG_NAME, "tr")
 
     time.sleep(500)
 
