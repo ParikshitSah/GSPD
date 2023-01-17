@@ -1,4 +1,4 @@
-import time
+
 from dotenv import load_dotenv  # for python-dotenv method
 import os
 from selenium import webdriver
