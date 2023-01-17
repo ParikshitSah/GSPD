@@ -27,21 +27,23 @@ def main():
 
     # Getting First Names
     # Table > tbody > tr > td > a (First Name)
-    Table = driver.find_elements(By.TAG_NAME, "table")
-    
+
+
     
 
-    for i in Table:
-        Names = i.find_elements(By.TAG_NAME, "a")
-        for e in Names:
-            print(e.text)
 
-    # Body = Table.find_element(By.TAG_NAME, "tbody")
-    # Tr = Body.find_element(By.TAG_NAME, "tr")
+    def get_name(prompt):
+        Name = driver.find_elements(By.XPATH, prompt)
+    
+        for i in Name:
+            print(i.text)
+    
+    # FirstName = get_name("//table/tbody/tr/td[2]/a") 
+    LastName = get_name("//table/tbody/tr/td[3]/font")
+
+
 
     time.sleep(500)
-
-    
 
 
 main()
