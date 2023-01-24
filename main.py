@@ -5,7 +5,7 @@ import time
 last_prompt = "//table/tbody/tr/td[2]//a"
 first_prompt = "//table/tbody/tr/td[3]//font"
 # Enter webpage link here
-link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=3834&coursetype=0"
+link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=3806"
 
 # log in to GSMU admin webpage
 scrape.login()

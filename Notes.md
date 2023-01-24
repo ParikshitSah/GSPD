@@ -17,6 +17,7 @@
   - [ ] Mark and Unmark Feature
   - [ ] Remove Print functions
   - [ ] Make a log file _for debugging_
+  - [ ] Find a way to mark attendance
 - [ ] Make a module to get names from excel or zoom
 
 ---
