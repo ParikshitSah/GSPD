@@ -11,11 +11,13 @@
   - [X] Download all libraries -> prettytable
   - [ ] Fix partial and perfecr matches **side quest**
   - [ ] Make a return value
+    - [ ] Add index
+    - [ ] get values based on index
+    - [ ] create new list based on index
+  - [ ] Mark and Unmark Feature
   - [ ] Remove Print functions
   - [ ] Make a log file _for debugging_
 - [ ] Make a module to get names from excel or zoom
-
-
 
 ---
 
