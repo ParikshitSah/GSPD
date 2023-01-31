@@ -17,21 +17,64 @@ def main():
 
     # create list with excel names
     excelNamesUnfiltered = [
-        'Abd Alrhman Bani Issa', 'Abigail Erskine', 'Alex Ozbolt', 'Allegra Stahl',
-        'Connor Lazzaro', 'Elvis Junior Dun-Dery', 'Enoch Tetteh Amoatey',
-        'Enoch Tetteh Amoatey', 'Favour Ojike', 'Francisco', 'Francisco',
-        'Hailey Arreola', 'Heather Howard', 'Ifunanya Ezekiel', 'Ifunanya Ezekiel',
-        'Jak', 'Javid Mardanov', 'Jed Wang', 'JOSEPH ALI',
-        'Kayla Pasteur (kayla pasteur)', 'mberikou',
-        'Mofareh Alzahrani # Alzahrm@purdue.edu', 'Monica Agu', 'Monica Agu',
-        'Nigar Karimli', 'Padde Musa', 'Padde Musa', 'Padde Musa', 'Rajan Mishra',
-        'Rashi Jain', 'Ravishankar Chatta Subramaniam',
-        'Ravishankar Chatta Subramaniam', 'Ravishankar Chatta Subramaniam',
-        'Ravishankar Chatta Subramaniam', 'Ravishankar Chatta Subramaniam',
-        'Ravishankar Chatta Subramaniam', 'Rishi', 'Samarnh Pang', 'Shuqi Liao',
-        'Shuqi Liao', 'Trey Cluff', 'Uche Chidi', 'Uche Chidi (chidi’s iPa)',
-        'Vishwa Chandupatla', 'William Murray Keller', 'Ying Cheng Chen',
-        'Abbas Naseem'
+        'Abd Alrhman Bani Issa',
+        'Abigail Erskine',
+        'Alex Ozbolt',
+        'Allegra Stahl',
+        'Connor Lazzaro',
+        'Elvis Junior Dun-Dery',
+        'Enoch Tetteh Amoatey',
+        'Enoch Tetteh Amoatey',
+        'Favour Ojike',
+        'Francisco',
+        'Francisco',
+        'Mia',
+        'Dikai Xu',
+        'Kate Moran',
+        'Christina Joslin',
+        'KUNMING SHAO',
+        'Yihao Chen',
+        'Vlada Volyanskaya',
+        'Thomas',
+        'Lucas M.',
+        'Jessica Veenstra',
+        'Maddie Ransford',
+        'Michael Cheng',
+        'Michael Hansen',
+        'Alma Lopez Linan',
+        'Nicole Balog',
+        'Eunjae Choi',
+        'Ethan Potter',
+        'Kendalyn Fruehauf',
+        'Onni',
+        'David Park',
+        'Zainub',
+        'nathan',
+        'Toby',
+        'Kyle Andrew Janda',
+        'Danny G',
+        'Will Evans',
+        'Gannon Rice',
+        'William Stevens',
+        'Yunlin Zhang',
+        'Colin Mackenzie',
+        'Andrew',
+        'Max Kushner',
+        'Matthew Pearce',
+        'Yiyuan Z',
+        'DBationo (db)',
+        'Secret Marina Permenter',
+        'Jacob Aldridge',
+        'Andrew Liu',
+        'Ziang Chen',
+        'Tobias Bautista',
+        'Maria Paula Armenta',
+        'Erik Ohst',
+        'Ivan Yezhov (иван ежов)',
+        'Cheng Xin',
+        'kunming s',
+        'Lareina Gu',
+        'Shadwa Eldosuky'
     ]
 
     excelNames = [*set(excelNamesUnfiltered)
@@ -88,21 +131,21 @@ def main():
                 if (index in KeyValues["Matches"].keys()):
                     KeyValues["Matches"][index].append(number)
                 else:
-                   
+
                     KeyValues["Matches"][index] = [number]
 
             elif (index in KeyValues["Partial Matches"].keys()):
                 KeyValues["Partial Matches"][index].append(number)
             else:
-                
+
                 KeyValues["Partial Matches"][index] = [number]
 
     def show_matches():
-        counter = 1
+        counter = 0
         for i in KeyValues["Matches"]:
             for indexofarray in [*set(KeyValues["Matches"][i])]:
                 x.add_row([
-                    counter, gNames["first"][indexofarray], gNames["last"][indexofarray], "-",
+                    indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray], "-",
                     excelNames[i]
                 ])
                 counter = counter + 1
@@ -110,7 +153,7 @@ def main():
         for i in KeyValues["Partial Matches"]:
             for indexofarray in [*set(KeyValues["Partial Matches"][i])]:
                 x.add_row([
-                    counter, gNames["first"][indexofarray], gNames["last"][indexofarray],
+                    indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray],
                     excelNames[i], "-"
                 ])
                 counter = counter + 1
@@ -120,7 +163,7 @@ def main():
     def show_results():
 
         x.sortby = "Last Name"
-        print(x.get_string(sortby="Index"))
+        print(x.get_string())
 
         # TODO Fix this : Showing stats for perfect and partial matches (does not work)
         print("-" * 60)
@@ -132,12 +175,28 @@ def main():
         # print('📃 KeyValues:', KeyValues)
 
     show_results()
-    
+
     # MVP working for deleting names
-    userin = input("Enter row to delete")
-    x.del_row(int(userin)-1)
-    print(x.get_string(sortby="Index"))
+    row_count = len(x.rows)
+
+    def user_delete_prompt():
+        userin = int(input("Enter row to delete "))
+        while(userin < 0 or userin > row_count):
+            print("Please enter a number from 0 to", row_count-1)
+            userin = int(input("Enter row to delete "))
+        return userin
     
+    
+
+    
+    
+
+        
+
+    # x.del_row(int(userin))
+    # print(x.get_string(sortby="Index")) # TODO add validation
+
+
 
 
 if __name__ == "__main__":

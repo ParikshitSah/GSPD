@@ -11,14 +11,17 @@
   - [X] Download all libraries -> prettytable
   - [ ] Fix partial and perfect matches **side quest**
   - [ ] Make a return value
+
     - [X] Add index
-    - [ ] get values based on index (MVP Working)
-    - [ ] create new list based on index
+    - [ ] Make separate table for partial and full match
+    - [ ] Add option to add and delete from full match
+    - [ ] return as a list?
   - [ ] Mark and Unmark Feature
   - [ ] Remove Print functions
   - [ ] Make a log file _for debugging_
   - [ ] Find a way to mark attendance
 - [ ] Make a module to get names from excel or zoom
+- [ ] `bug` Jacob A -> Check for duplicate names in full match
 
 ---
 
