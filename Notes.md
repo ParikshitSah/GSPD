@@ -9,10 +9,10 @@
 
 - [ ] Integrate File from Replit `attendance.py`
   - [X] Download all libraries -> prettytable
-  - [ ] Fix partial and perfecr matches **side quest**
+  - [ ] Fix partial and perfect matches **side quest**
   - [ ] Make a return value
-    - [ ] Add index
-    - [ ] get values based on index
+    - [X] Add index
+    - [ ] get values based on index (MVP Working)
     - [ ] create new list based on index
   - [ ] Mark and Unmark Feature
   - [ ] Remove Print functions

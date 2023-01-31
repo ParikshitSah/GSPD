@@ -99,7 +99,6 @@ def main():
 
     def show_matches():
         counter = 1
-        # print complete matches
         for i in KeyValues["Matches"]:
             for indexofarray in [*set(KeyValues["Matches"][i])]:
                 x.add_row([
@@ -122,6 +121,8 @@ def main():
 
         x.sortby = "Last Name"
         print(x.get_string(sortby="Index"))
+
+        # TODO Fix this : Showing stats for perfect and partial matches (does not work)
         print("-" * 60)
         print("|", "🧮 Total perfect matches:",
               '{:0>2}'.format(len(KeyValues["Matches"])), "|",
@@ -131,6 +132,12 @@ def main():
         # print('📃 KeyValues:', KeyValues)
 
     show_results()
+    
+    # MVP working for deleting names
+    userin = input("Enter row to delete")
+    x.del_row(int(userin)-1)
+    print(x.get_string(sortby="Index"))
+    
 
 
 if __name__ == "__main__":
