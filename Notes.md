@@ -7,7 +7,7 @@
 - object?
 - create a chache file
 
-- [ ] Integrate File from Replit `attendance.py`
+- [X] Integrate File from Replit `attendance.py`
   - [X] Download all libraries -> prettytable
   - [ ] Fix partial and perfect matches **side quest**
   - [ ] Make a return value

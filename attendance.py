@@ -4,14 +4,13 @@ from prettytable import PrettyTable
 from main import *
 from user_pts import *
 
+
 def main():
 
     x = PrettyTable()
     p = PrettyTable()
-    
-  
-    
-    p.field_names = [ "ID", "First Name", "Last Name", "⌛  Partial Match"]
+
+    p.field_names = ["ID", "First Name", "Last Name", "⌛  Partial Match"]
     x.field_names = [
         "ID", "First Name", "Last Name", " ✅ Full Match"
     ]
@@ -145,10 +144,7 @@ def main():
 
                 KeyValues["Partial Matches"][index] = [number]
 
-        
-        
     final_list = []
-    
 
     def show_results():
         """ 
@@ -165,7 +161,7 @@ def main():
         """
         Add values to the partial match table. Adds the ID, First Name, Last Name and Excel Names
         """
-        
+
         for i in KeyValues["Partial Matches"]:
             for indexofarray in [*set(KeyValues["Partial Matches"][i])]:
                 p.add_row([
@@ -175,15 +171,16 @@ def main():
         x.sortby = "ID"
         p.sortby = "ID"
         r = PrettyTable()
-        r.field_names = ["🧮 Total perfect matches:",'{:0>2}'.format(len(x.rows)),"⌛ Total partial matches:", '{:0>2}'.format(len(p.rows))]
-        
+        r.field_names = ["🧮 Total perfect matches:", '{:0>2}'.format(
+            len(x.rows)), "⌛ Total partial matches:", '{:0>2}'.format(len(p.rows))]
+
         # Print perfect matches
-        print(x.get_string()) 
+        print(x.get_string())
         # Print Partial Matches
         print(p.get_string())
         # Print Results
         print(r.get_string())
-        
+
         print(final_list)
 
     show_results()
@@ -191,18 +188,21 @@ def main():
     # MVP working for deleting names
     row_count = len(x.rows)
 
+
     def user_delete_prompt():
+        
+        """This is just a prototype, might not need this
+
+        Returns:
+            list: return the list with numbers of index to delete from the final list
+        """
         userin = int(input("Enter row to delete "))
-        while(userin < 0 or userin > row_count):
+        while (userin < 0 or userin > row_count):
             print("Please enter a number from 0 to", row_count-1)
             userin = int(input("Enter row to delete "))
         return userin
-    
-
 
     print(user_edit_prompt())
-    
-    
 
 
 if __name__ == "__main__":
