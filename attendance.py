@@ -7,8 +7,13 @@ from main import *
 def main():
 
     x = PrettyTable()
+    p = PrettyTable()
+    
+  
+    
+    p.field_names = [ "ID", "First Name", "Last Name", "⌛  Partial Match"]
     x.field_names = [
-        "Index", "First Name", "Last Name", "⌛  Partial Match", " ✅ Full Match"
+        "ID", "First Name", "Last Name", " ✅ Full Match"
     ]
 
     # Conducting a Literature Review 11/1/2022
@@ -72,7 +77,7 @@ def main():
         'Erik Ohst',
         'Ivan Yezhov (иван ежов)',
         'Cheng Xin',
-        'kunming s',
+        'kunming',
         'Lareina Gu',
         'Shadwa Eldosuky'
     ]
@@ -141,38 +146,39 @@ def main():
                 KeyValues["Partial Matches"][index] = [number]
 
     def show_matches():
-        counter = 0
+        
         for i in KeyValues["Matches"]:
             for indexofarray in [*set(KeyValues["Matches"][i])]:
                 x.add_row([
-                    indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray], "-",
+                    indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray],
                     excelNames[i]
                 ])
-                counter = counter + 1
+
 
         for i in KeyValues["Partial Matches"]:
             for indexofarray in [*set(KeyValues["Partial Matches"][i])]:
-                x.add_row([
+                p.add_row([
                     indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray],
-                    excelNames[i], "-"
+                    excelNames[i]
                 ])
-                counter = counter + 1
+            
 
     show_matches()
 
     def show_results():
 
-        x.sortby = "Last Name"
+        x.sortby = "ID"
+        p.sortby = "ID"
         print(x.get_string())
+        print(p.get_string())
 
-        # TODO Fix this : Showing stats for perfect and partial matches (does not work)
-        print("-" * 60)
-        print("|", "🧮 Total perfect matches:",
-              '{:0>2}'.format(len(KeyValues["Matches"])), "|",
-              "Total partial matches:",
-              '{:0>2}'.format(len(KeyValues["Partial Matches"])), "|")
-        print("-" * 60)
-        # print('📃 KeyValues:', KeyValues)
+
+        r = PrettyTable()
+       
+        r.field_names = ["🧮 Total perfect matches:",'{:0>2}'.format(len(x.rows)),"⌛Total partial matches:", '{:0>2}'.format(len(p.rows))]
+
+        
+        print(r.get_string())
 
     show_results()
 

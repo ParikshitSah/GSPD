@@ -13,7 +13,7 @@
   - [ ] Make a return value
 
     - [X] Add index
-    - [ ] Make separate table for partial and full match
+    - [X] Make separate table for partial and full match
     - [ ] Add option to add and delete from full match
     - [ ] return as a list?
   - [ ] Mark and Unmark Feature
