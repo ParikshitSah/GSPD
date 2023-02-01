@@ -2,7 +2,7 @@
 
 from prettytable import PrettyTable
 from main import *
-
+from user_pts import *
 
 def main():
 
@@ -145,40 +145,46 @@ def main():
 
                 KeyValues["Partial Matches"][index] = [number]
 
-    def show_matches():
         
+        
+    final_list = []
+    
+
+    def show_results():
+        """ 
+        Add values to the perfect match table 
+        """
         for i in KeyValues["Matches"]:
             for indexofarray in [*set(KeyValues["Matches"][i])]:
                 x.add_row([
                     indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray],
                     excelNames[i]
                 ])
+                final_list.append(indexofarray)
 
-
+        """
+        Add values to the partial match table. Adds the ID, First Name, Last Name and Excel Names
+        """
+        
         for i in KeyValues["Partial Matches"]:
             for indexofarray in [*set(KeyValues["Partial Matches"][i])]:
                 p.add_row([
                     indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray],
                     excelNames[i]
                 ])
-            
-
-    show_matches()
-
-    def show_results():
-
         x.sortby = "ID"
         p.sortby = "ID"
-        print(x.get_string())
-        print(p.get_string())
-
-
         r = PrettyTable()
-       
-        r.field_names = ["🧮 Total perfect matches:",'{:0>2}'.format(len(x.rows)),"⌛Total partial matches:", '{:0>2}'.format(len(p.rows))]
-
+        r.field_names = ["🧮 Total perfect matches:",'{:0>2}'.format(len(x.rows)),"⌛ Total partial matches:", '{:0>2}'.format(len(p.rows))]
         
+        # Print perfect matches
+        print(x.get_string()) 
+        # Print Partial Matches
+        print(p.get_string())
+        # Print Results
         print(r.get_string())
+        
+        print(final_list)
 
     show_results()
 
@@ -192,17 +198,11 @@ def main():
             userin = int(input("Enter row to delete "))
         return userin
     
+
+
+    print(user_edit_prompt())
     
-
     
-    
-
-        
-
-    # x.del_row(int(userin))
-    # print(x.get_string(sortby="Index")) # TODO add validation
-
-
 
 
 if __name__ == "__main__":

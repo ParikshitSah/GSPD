@@ -28,3 +28,5 @@
 # Resouces
 
 prettytable docs : [Documentation](https://pypi.org/project/prettytable/)
+
+PyinitPlus docs : [Documentation](https://automatetheboringstuff.com/2e/chapter8/)
