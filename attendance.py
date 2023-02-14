@@ -213,7 +213,9 @@ def main():
         Returns:
             None: _description_
         """
+        print("🪶",amend_list)
         max_final_list = max(amend_list)
+        print(max_final_list)
         user_edit = get_list(max_final_list)
         for i in user_edit: 
                 if(func == "DEL"):
@@ -260,7 +262,7 @@ def main():
                 
     
     def make_final_list():
-        print("Do you want to make more edits? [y/n]")
+        
         more_edits = pyip.inputYesNo()
         
         curr = final_list.copy()
