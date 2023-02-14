@@ -181,7 +181,7 @@ def main():
         # Print Results
         print(r.get_string())
 
-        print(final_list)
+        print(final_list.sort())
 
     show_results()
 
@@ -202,7 +202,8 @@ def main():
             userin = int(input("Enter row to delete "))
         return userin
 
-    print(user_edit_prompt())
+    
+    make_edits()
 
 
 if __name__ == "__main__":
