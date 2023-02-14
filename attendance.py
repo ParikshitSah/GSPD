@@ -202,25 +202,93 @@ def main():
             userin = int(input("Enter row to delete "))
         return userin
 
-    
-    edit_response = make_edits()
-    
-    max_final_list = max(final_list)
-    amend_list = final_list
-    if(edit_response == "Cancel"):
-        # base case
-        print("Exiting Edit")
-    elif(edit_response == "Add"):
+    def update_list(func, amend_list):
+        """Calls function from user_pts.py to 
+        add or delete values to the duplicate list
+
+        Args:
+            func (function): add or delete function?
+            amend_list (list): takes a copy of the final list
+
+        Returns:
+            None: _description_
+        """
+        max_final_list = max(amend_list)
         user_edit = get_list(max_final_list)
-        for i in user_edit:
-            try:
-                list_add(i, amend_list)
-            except ValueError:
-                print(f"error number {i} already in list, check table again!")
-                continue
-                
-        print(amend_list)
+        for i in user_edit: 
+                if(func == "DEL"):
+                    try:
+                        list_delete(i, amend_list)
+                    except ValueError:
+                        print(f"error number {i} already not in list, check table again!")
+                        continue
+                    
+                elif(func == "ADD"):
+                    try:
+                        list_add(i, amend_list)
+                    except ValueError:
+                        print(f"error number {i} already in list, check table again!")
+                        continue
+    
+    
+    def change_list(): 
+        """Implements changes to a duplicate list of the final list created earlier. This is done to so that changes can 
+        be reverted if needed.
+        """
+        dup_list = final_list
+        
+        response = make_edits()
+        
+        
+        
+        if(response == "Cancel" or response == "exit"):
+            print("Exiting Edit")
+            return "exit"
             
+        # Adding to the list
+        elif(response == "Add"):
+            update_list("ADD", dup_list)
+            
+        # Deleting from the list
+        elif(response == "Delete"):
+            update_list("DEL", dup_list)
+            
+        print("Here's the final list select options below")
+        print(dup_list)
+        return dup_list
+        
+                
+    
+    def make_final_list():
+        print("Do you want to make more edits? [y/n]")
+        more_edits = pyip.inputYesNo()
+        
+        curr = []
+        
+        if(more_edits == "no"):
+            # confirm and push changes
+            print("Here is the final list of attendes that will be marked")
+            print("Confirm Attendence? [y/n]")
+            if (pyip.inputYesNo() == "yes"):
+                print("confirmed")
+            else:
+                print("cancelled")
+        else:
+            # loop while user wants to no more make changes
+            while more_edits == "yes":
+                if(change_list() == "exit"):
+                    more_edits = "no"
+                
+                
+    
+            
+        
+        
+    make_final_list()
+                    
+                       
+                    
+              
 
 
 if __name__ == "__main__":

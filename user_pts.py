@@ -12,7 +12,9 @@ def user_edit_prompt():
 def make_edits():
     answer = user_edit_prompt()
 
-    if (answer):
+    if (answer == "no"):
+        return "exit"
+    else:
         response = pyip.inputMenu(["Add", "Delete", "Cancel"], numbered=True )
         return response
 
@@ -64,3 +66,4 @@ def get_list(max_num):
             # If the converted number is not within the desired range, skip it
             continue
     return result
+
