@@ -33,4 +33,6 @@ def get_name(prompt , link):
                 result.append(i.text)
         return result
 
+def close_browser():
+    driver.quit()
 

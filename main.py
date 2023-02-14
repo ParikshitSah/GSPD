@@ -1,5 +1,7 @@
 import scrape
 import time
+from selenium import webdriver
+
 
 # Xpath to First and Last Names on the attendance webpage
 last_prompt = "//table/tbody/tr/td[2]//a"
@@ -12,7 +14,7 @@ scrape.login()
 # Get the First and Last Names
 First_name = scrape.get_name(first_prompt, link)
 Last_name = scrape.get_name(last_prompt, link)
-
+scrape.close_browser()
 
 # print("Last names: ", len(Last_name), "First Names: ", len(First_name))
 
@@ -31,6 +33,7 @@ def export_list(First_name, Last_name):
     gNames["first"] = conv_f
     gNames["last"] = conv_l
 
+    
     return gNames
 
 

@@ -4,6 +4,7 @@ from prettytable import PrettyTable
 from main import *
 from user_pts import *
 
+final_list = []
 
 def main():
 
@@ -144,7 +145,6 @@ def main():
 
                 KeyValues["Partial Matches"][index] = [number]
 
-    final_list = []
 
     def show_results():
         """ 
@@ -235,7 +235,7 @@ def main():
         """Implements changes to a duplicate list of the final list created earlier. This is done to so that changes can 
         be reverted if needed.
         """
-        dup_list = final_list
+        dup_list = final_list.copy()
         
         response = make_edits()
         
@@ -263,28 +263,36 @@ def main():
         print("Do you want to make more edits? [y/n]")
         more_edits = pyip.inputYesNo()
         
-        curr = []
+        curr = final_list.copy()
         
         if(more_edits == "no"):
             # confirm and push changes
             print("Here is the final list of attendes that will be marked")
+            print(final_list)
             print("Confirm Attendence? [y/n]")
             if (pyip.inputYesNo() == "yes"):
                 print("confirmed")
             else:
                 print("cancelled")
+            return
         else:
             # loop while user wants to no more make changes
+            
             while more_edits == "yes":
-                if(change_list() == "exit"):
+                run = change_list()
+                if( run == "exit"):
                     more_edits = "no"
-                
-                
+                else:
+                    curr = run
+            
+        
+        return curr
     
             
         
         
-    make_final_list()
+    print(make_final_list())
+    print(final_list)
                     
                        
                     
