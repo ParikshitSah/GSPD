@@ -10,18 +10,12 @@
 - [X] Integrate File from Replit `attendance.py`
 - [X] Download all libraries -> prettytable
 - [ ] Fix partial and perfect matches **side quest**
-- [X] Make a return value
-
-- [X] Add index
-- [X] Make separate table for partial and full match
-- [ ] Add option to add and delete from full match
-  - [ ] return as a list?
-- [ ] Mark and Unmark Feature
-- [ ] Remove Print functions
 - [ ] Make a log file _for debugging_
 - [ ] Find a way to mark attendance
 - [ ] Make a module to get names from excel or zoom
 - [ ] `bug` Jacob A -> Check for duplicate names in full match
+- [ ] Add feature to revert changes
+- [ ] out of range number can still be added to the final list ??????
 
 ---
 
