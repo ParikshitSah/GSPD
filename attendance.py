@@ -203,7 +203,24 @@ def main():
         return userin
 
     
-    make_edits()
+    edit_response = make_edits()
+    
+    max_final_list = max(final_list)
+    amend_list = final_list
+    if(edit_response == "Cancel"):
+        # base case
+        print("Exiting Edit")
+    elif(edit_response == "Add"):
+        user_edit = get_list(max_final_list)
+        for i in user_edit:
+            try:
+                list_add(i, amend_list)
+            except ValueError:
+                print(f"error number {i} already in list, check table again!")
+                continue
+                
+        print(amend_list)
+            
 
 
 if __name__ == "__main__":
