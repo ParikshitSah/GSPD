@@ -15,7 +15,7 @@ def make_edits():
     if (answer == "no"):
         return "exit"
     else:
-        response = pyip.inputMenu(["Add", "Delete", "Cancel"], numbered=True )
+        response = pyip.inputMenu(["Add", "Delete", "Cancel","Revert To Orignal List"], numbered=True )
         return response
 
 def list_delete(num, list):
@@ -58,12 +58,13 @@ def get_list(max_num):
         
         try:
             converted_number = int(number)
+            if not (0 <= converted_number <= max_num):
+                # If the converted number is not within the desired range, skip it
+                continue
             result.append(converted_number)
+            
         except ValueError:
             # If the string cannot be converted to an integer, just skip it
-            continue
-        if not (0 <= converted_number <= max_num):
-            # If the converted number is not within the desired range, skip it
             continue
     return result
 
