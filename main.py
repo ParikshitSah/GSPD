@@ -1,6 +1,8 @@
+from attendance import main as attendance_main
 import scrape
 import time
 from selenium import webdriver
+
 
 
 # Xpath to First and Last Names on the attendance webpage
@@ -36,5 +38,9 @@ def export_list(First_name, Last_name):
     
     return gNames
 
+def take_attendance():
+    result = attendance_main()
+    print("Marking Attendees ... ⌛")
+    
 
-print(export_list(First_name, Last_name))
+take_attendance()
