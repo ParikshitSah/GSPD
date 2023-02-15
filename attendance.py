@@ -6,6 +6,7 @@ from user_pts import *
 
 final_list = []
 
+
 def main():
 
     x = PrettyTable()
@@ -145,7 +146,6 @@ def main():
 
                 KeyValues["Partial Matches"][index] = [number]
 
-
     def show_results():
         """ 
         Add values to the perfect match table 
@@ -181,26 +181,10 @@ def main():
         # Print Results
         print(r.get_string())
 
-        print(final_list.sort())
-
     show_results()
 
     # MVP working for deleting names
     row_count = len(x.rows)
-
-
-    def user_delete_prompt():
-        
-        """This is just a prototype, might not need this
-
-        Returns:
-            list: return the list with numbers of index to delete from the final list
-        """
-        userin = int(input("Enter row to delete "))
-        while (userin < 0 or userin > row_count):
-            print("Please enter a number from 0 to", row_count-1)
-            userin = int(input("Enter row to delete "))
-        return userin
 
     def update_list(func, amend_list):
         """Calls function from user_pts.py to 
@@ -213,92 +197,86 @@ def main():
         Returns:
             None: _description_
         """
-        print("🪶",amend_list)
         max_final_list = max(amend_list)
-        print(max_final_list)
         user_edit = get_list(max_final_list)
-        for i in user_edit: 
-                if(func == "DEL"):
-                    try:
-                        list_delete(i, amend_list)
-                    except ValueError:
-                        print(f"error number {i} already not in list, check table again!")
-                        continue
-                    
-                elif(func == "ADD"):
-                    try:
-                        list_add(i, amend_list)
-                    except ValueError:
-                        print(f"error number {i} already in list, check table again!")
-                        continue
-    
-    
-    def change_list(): 
+        for i in user_edit:
+            if (func == "DEL"):
+                try:
+                    list_delete(i, amend_list)
+                except ValueError:
+                    print(
+                        f"error number {i} already not in list, check table again!")
+                    continue
+
+            elif (func == "ADD"):
+                try:
+                    list_add(i, amend_list)
+                except ValueError:
+                    print(
+                        f"error number {i} already in list, check table again!")
+                    continue
+
+    def change_list():
         """Implements changes to a duplicate list of the final list created earlier. This is done to so that changes can 
         be reverted if needed.
         """
         dup_list = final_list.copy()
-        
+
         response = make_edits()
-        
-        
-        
-        if(response == "Cancel" or response == "exit"):
+
+        if (response == "Cancel" or response == "exit"):
             print("Exiting Edit")
             return "exit"
-            
+
         # Adding to the list
-        elif(response == "Add"):
+        elif (response == "Add"):
             update_list("ADD", dup_list)
-            
+
         # Deleting from the list
-        elif(response == "Delete"):
+        elif (response == "Delete"):
             update_list("DEL", dup_list)
-            
+
+        elif (response == "Revert To Orignal List"):
+            print("Confirm changes? All changes made will be lost")
+            if pyip.inputYesNo() == 'yes':
+                return final_list
+
         print("Here's the final list select options below")
         print(dup_list)
         return dup_list
-        
-                
-    
+
     def make_final_list():
-        
+
+        print("Make edits to the list [y/n]")
         more_edits = pyip.inputYesNo()
-        
+
         curr = final_list.copy()
-        
-        if(more_edits == "no"):
+
+        if (more_edits == "no"):
             # confirm and push changes
             print("Here is the final list of attendes that will be marked")
             print(final_list)
             print("Confirm Attendence? [y/n]")
             if (pyip.inputYesNo() == "yes"):
                 print("confirmed")
+                return
             else:
                 print("cancelled")
             return
         else:
             # loop while user wants to no more make changes
-            
+
             while more_edits == "yes":
                 run = change_list()
-                if( run == "exit"):
+                if (run == "exit"):
                     more_edits = "no"
                 else:
                     curr = run
-            
-        
+
         return curr
-    
-            
-        
-        
+
     print(make_final_list())
     print(final_list)
-                    
-                       
-                    
-              
 
 
 if __name__ == "__main__":
