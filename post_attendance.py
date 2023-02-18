@@ -9,12 +9,12 @@ from dotenv import load_dotenv  # for python-dotenv method
 from scrape import login
 
 
-driver = webdriver.Chrome()
 load_dotenv()  # for python-dotenv method
 
 
 def mark_attendance(ID):
 
+    driver = webdriver.Chrome()
 
     link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=3786&coursetype=0"
 
@@ -30,10 +30,11 @@ def mark_attendance(ID):
        
         driver.find_element(By.XPATH, f"/html/body/center/font/table/tbody/tr[{str(i+2)}]/td[4]/font/table/tbody/tr/td/input").click()
         print(f"🤖 Marked Attendance for {first(i+2).text} {second(i+2).text}")
+    
+    time.sleep(100)
+        
 
 
 
 
-mark_attendance([0,1,2,3,4])
-time.sleep(100)
 

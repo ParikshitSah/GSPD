@@ -7,12 +7,7 @@
 
 - [ ] Fix partial and perfect matches **side quest**
 - [ ] Make a log file _for debugging_
-- [ ] Find a way to mark attendance
-- [X] Make a module to get names from excel or zoom
 - [ ] `bug` Jacob A -> Check for duplicate names in full match
-- [X] Add feature to revert changes
-- [X] Make function to take list values and make table
-- [X] Integration hell!!!!!!
 
 ---
 

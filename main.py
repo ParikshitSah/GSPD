@@ -1,6 +1,7 @@
 import time
 from selenium import webdriver
 from attendance import make_final_list, lxt, final_list
+from post_attendance import mark_attendance
 
 
 def main():
@@ -12,8 +13,12 @@ def main():
     print(table[0])
     # Print the total number of attendees
     print(table[1])
-    # Print the initial list 
-    print(lxt(final_list)[0])
+    # # Print the initial list 
+    # print(lxt(final_list)[0])
+    mark_attendance(result)
+    
+    
+    
     
     
     

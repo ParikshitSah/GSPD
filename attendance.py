@@ -28,6 +28,8 @@ excelNamesUnfiltered = [
     'Abigail Erskine',
     'Alex Ozbolt',
     'Allegra Stahl',
+    'Lamunu',
+    'Benjamin Ayodipupo',
     'Connor Lazzaro',
     'Elvis Junior Dun-Dery',
     'Enoch Tetteh Amoatey',
@@ -218,7 +220,8 @@ def update_list(func, amend_list):
     Returns:
         None: _description_
     """
-    max_final_list = max(amend_list)
+    
+    max_final_list = len(gNames['first'])
     user_edit = get_list(max_final_list)
     for i in user_edit:
         if (func == "DEL"):
