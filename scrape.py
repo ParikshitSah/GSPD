@@ -10,7 +10,7 @@ load_dotenv()  # for python-dotenv method
 
 
 
-
+# /html/body/center/font/table/tbody/tr[2]/td[4]
 # Xpath to First and Last Names on the attendance webpage
 last_prompt = "//table/tbody/tr/td[2]//a"
 first_prompt = "//table/tbody/tr/td[3]//font"
@@ -38,7 +38,7 @@ def export_list(First_name, Last_name):
     
     # log in to GSMU admin webpage
     
-    
+
     conv_f = dict(enumerate(First_name))
     conv_l = dict(enumerate(Last_name))
 

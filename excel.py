@@ -23,5 +23,3 @@ def read_file(column,path):
     # Return the column values
     return NamesExcel
 
-
-print(read_file('Name (Original Name)',"./2.7.2023 Budgeting and Saving Money.csv"))
