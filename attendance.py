@@ -200,7 +200,7 @@ def show_results():
     print(r.get_string())
 
 show_results()
-
+dup_list = final_list.copy()
 # MVP working for deleting names
 row_count = len(x.rows)
 
@@ -238,7 +238,7 @@ def change_list():
     """Implements changes to a duplicate list of the final list created earlier. This is done to so that changes can 
     be reverted if needed.
     """
-    dup_list = final_list.copy()
+    
 
     response = make_edits()
 
@@ -258,10 +258,14 @@ def change_list():
         print("Confirm changes? All changes made will be lost")
         if pyip.inputYesNo() == 'yes':
             return final_list
+        else:
+            return dup_list
 
     print("✅ Here's the final table select options below ✅")
     print(lxt(dup_list))
     return dup_list
+
+
 
 def make_final_list():
 
