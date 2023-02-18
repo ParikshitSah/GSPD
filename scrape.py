@@ -21,7 +21,7 @@ link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=4056
 # print("Last names: ", len(Last_name), "First Names: ", len(First_name))
 
 def scrape_names():
-    login()
+    login(driver)
     # Get the First and Last Names
     First_name = get_name(first_prompt, link)
     Last_name = get_name(last_prompt, link)
@@ -50,7 +50,7 @@ def export_list(First_name, Last_name):
     
     return gNames
 
-def login():
+def login(driver):
     driver.get("http://gspd.gosignmeup.com/admin")
 
     # Find the username and password fields
@@ -61,6 +61,8 @@ def login():
         os.environ.get('Username_GSMU'))
     Pass = Form.find_element(By.NAME, 'pass').send_keys(
         os.environ.get('Password_GSMU') + Keys.ENTER)
+    
+    return True
 
 
 def get_name(prompt , link):
