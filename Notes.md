@@ -11,8 +11,8 @@
 - [ ] Make a module to get names from excel or zoom
 - [ ] `bug` Jacob A -> Check for duplicate names in full match
 - [X] Add feature to revert changes
-- [ ] Make function to take list values and make table
-- [ ] Integration hell!!!!!!
+- [X] Make function to take list values and make table
+- [X] Integration hell!!!!!!
 
 ---
 

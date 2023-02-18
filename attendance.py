@@ -158,9 +158,12 @@ def lxt(index):
     """
     names = PrettyTable()
     names.field_names = ["ID","Last Name", "First Name"]
+    total = PrettyTable()
+    total.padding_width = 5
+    total.field_names = ["Total Participants: ", len(index)]
     for i in index:
         names.add_row([i,gNames['first'][i], gNames['last'][i]])
-    return names.get_string(sortby= "ID")
+    return names.get_string(sortby= "ID"), total.get_string()
 
 
 
@@ -262,7 +265,7 @@ def change_list():
             return dup_list
 
     print("✅ Here's the final table select options below ✅")
-    print(lxt(dup_list))
+    print(lxt(dup_list)[0])
     return dup_list
 
 
@@ -277,7 +280,7 @@ def make_final_list():
     if (more_edits == "no"):
         # confirm and push changes
         print("✅ Here is the final list of attendes that will be marked ✅")
-        print(lxt(final_list))
+        print(lxt(final_list)[0])
         print("Confirm Attendence? [y/n]")
         if (pyip.inputYesNo() == "yes"):
             print("confirmed")
