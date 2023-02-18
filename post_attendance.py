@@ -27,9 +27,12 @@ def mark_attendance(ID):
     
 
     for i in ID:
-       
+       try:
+           
         driver.find_element(By.XPATH, f"/html/body/center/font/table/tbody/tr[{str(i+2)}]/td[4]/font/table/tbody/tr/td/input").click()
-        print(f"🤖 Marked Attendance for {first(i+2).text} {second(i+2).text}")
+        print(f"\033[32m🤖 Marked Attendance for {first(i+2).text} {second(i+2).text}\033[32m")
+       except:
+           continue
     
     time.sleep(100)
         

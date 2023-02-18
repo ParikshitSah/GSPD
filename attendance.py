@@ -162,7 +162,10 @@ def lxt(index):
     names.field_names = ["ID","Last Name", "First Name"]
     total = PrettyTable()
     total.padding_width = 5
-    total.field_names = ["Total Participants: ", len(index)]
+    total.header = False
+    total.field_names = ["1", "2"]
+    length = len(index)
+    total.add_row(["Total Participants", length])
     for i in index:
         names.add_row([i,gNames['first'][i], gNames['last'][i]])
     return names.get_string(sortby= "ID"), total.get_string()
