@@ -15,7 +15,7 @@ def mark_attendance(ID):
 
     driver = webdriver.Chrome()
 
-    link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=3786&coursetype=0"
+    link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=4025&coursetype=0"
 
     login(driver)
     

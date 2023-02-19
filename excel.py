@@ -21,5 +21,7 @@ def read_file(column,path):
     NamesExcel = [i for i in column_values]
 
     # Return the column values
+    print(NamesExcel)
     return NamesExcel
+
 

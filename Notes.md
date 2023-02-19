@@ -9,9 +9,12 @@
 - [ ] Make a log file _for debugging_
 - [ ] `bug` Jacob A -> Check for duplicate names in full match
 
+### Rework Attendance.py
+
+- Use regex
+- Results are not consistant
+
 ---
-
-
 
 - [ ] Create a central file for all the links
 - [ ] Integrate Excel sheet name
