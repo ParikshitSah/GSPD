@@ -120,32 +120,31 @@ def show_results():
     """ 
     Add values to the perfect match table 
     """
-    for i in KeyValues["Matches"]:
-        for indexofarray in [*set(KeyValues["Matches"][i])]:
-            x.add_row([
-                indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray],
-                excelNames[indexofarray]
-            ])
-            final_list.append(indexofarray)
+    # values are index of gNames
+    for values in KeyValues["Matches"]:
+        matchedArrays  = KeyValues["Matches"][values]
+        for num in matchedArrays:
+            # iterate through list inside matched key and add to table
+            x.add_row([values, gNames["first"][values], gNames["last"][values],excelNames[num]])
+            final_list.append(values)
             
-            
-    
 
     """
     Add values to the partial match table. Adds the ID, First Name, Last Name and Excel Names
     """
+    
+    for values in KeyValues["Partial Matches"]:
+        matchedArrays  = KeyValues["Partial Matches"][values]
+        for num in matchedArrays:
+            # iterate through list inside matched key and add to table
+            p.add_row([values, gNames["first"][values], gNames["last"][values],excelNames[num]])
 
-    for i in KeyValues["Partial Matches"]:
-        for indexofarray in [*set(KeyValues["Partial Matches"][i])]:
-            p.add_row([
-                indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray],
-                excelNames[indexofarray]
-            ])
+
     x.sortby = "ID"
     p.sortby = "ID"
     r = PrettyTable()
     r.field_names = ["🧮 Total perfect matches:", '{:0>2}'.format(
-        len(x.rows)), "⌛ Total partial matches:", '{:0>2}'.format(len(p.rows))]
+        len(final_list)), "⌛ Total partial matches:", '{:0>2}'.format(len(p.rows))]
 
     # Print perfect matches
     print(x.get_string())
@@ -156,7 +155,7 @@ def show_results():
 
 find_matches(0.7)
 
-# show_results()
+show_results()
 # dup_list = final_list.copy()
 # MVP working for deleting names
 # row_count = len(x.rows)
