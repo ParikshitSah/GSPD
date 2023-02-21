@@ -13,7 +13,7 @@ final_list = []
 x = PrettyTable()
 p = PrettyTable()
 
-p.field_names = ["ID", "First Name", "Last Name", "⌛  Partial Match"]
+p.field_names = ["ID", "First Name", "Last Name", "⌛  Partial Match", "Similarity Index"]
 x.field_names = [
     "ID", "First Name", "Last Name", " ✅ Full Match"
 ]
@@ -71,17 +71,17 @@ def find_matches(baseVal):
         for name in excelNames:
             real = f"{gNames['first'][i]} {gNames['last'][i]}"
             similarity = cosine_similarity(real.lower().strip(), name.lower().strip())
-            if similarity > baseVal :
-                if similarity > 0.89:
+            
+            if similarity >= baseVal :
+                if similarity > 0.92:
                     
                     KeyValues["Matches"].setdefault(i, []).append(excelNames.index(name))
                     
-                    print(f"✅ matched {real} index {i} with {name} index {excelNames.index(name)}")
                 else:
                    
                     KeyValues["Partial Matches"].setdefault(i, []).append(excelNames.index(name))
                 
-                    print(f"🎈Partially matched {real} index {i} with {name} index {excelNames.index(name)}")
+            
                     
     
                     
@@ -137,11 +137,19 @@ def show_results():
         matchedArrays  = KeyValues["Partial Matches"][values]
         for num in matchedArrays:
             # iterate through list inside matched key and add to table
-            p.add_row([values, gNames["first"][values], gNames["last"][values],excelNames[num]])
+            first = gNames["first"][values]
+            last = gNames["last"][values]
+            origN = f"{first} {last}"
+            macN = excelNames[num]
+            
+            
+            si = cosine_similarity(origN.lower().strip(), macN.lower().strip())
+            p.add_row([values, gNames["first"][values], gNames["last"][values],excelNames[num], si])
 
 
     x.sortby = "ID"
-    p.sortby = "ID"
+    p.sortby = "Similarity Index"
+    p.reversesort = True
     r = PrettyTable()
     r.field_names = ["🧮 Total perfect matches:", '{:0>2}'.format(
         len(final_list)), "⌛ Total partial matches:", '{:0>2}'.format(len(p.rows))]
@@ -153,12 +161,11 @@ def show_results():
     # Print Results
     print(r.get_string())
 
-find_matches(0.7)
+find_matches(0.701)
 
 show_results()
-# dup_list = final_list.copy()
-# MVP working for deleting names
-# row_count = len(x.rows)
+dup_list = final_list.copy()
+row_count = len(x.rows)
 
 def update_list(func, amend_list):
     """Calls function from user_pts.py to 
