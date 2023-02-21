@@ -4,15 +4,16 @@ from prettytable import PrettyTable
 from scrape import export_list, scrape_names
 from user_pts import *
 from excel import read_file
-
+import math
 final_list = []
 
 
+# Tetsung
 
 x = PrettyTable()
 p = PrettyTable()
 
-p.field_names = ["ID", "First Name", "Last Name", "⌛  Partial Match"]
+p.field_names = ["ID", "First Name", "Last Name", "⌛  Partial Match", "Similarity Index"]
 x.field_names = [
     "ID", "First Name", "Last Name", " ✅ Full Match"
 ]
@@ -26,131 +27,71 @@ gNames = export_list(First, Last)
 
 # create list with excel names
 excelNamesUnfiltered  = read_file("Name (Original Name)", "./2.15.2023 Personal Branding.csv")
-# excelNamesUnfiltered = [
-#     'Abd Alrhman Bani Issa',
-#     'Abigail Erskine',
-#     'Alex Ozbolt',
-#     'Allegra Stahl',
-#     'Lamunu',
-#     'Benjamin Ayodipupo',
-#     'Connor Lazzaro',
-#     'Elvis Junior Dun-Dery',
-#     'Enoch Tetteh Amoatey',
-#     'Enoch Tetteh Amoatey',
-#     'Favour Ojike',
-#     'Francisco',
-#     'Francisco',
-#     'Mia',
-#     'Dikai Xu',
-#     'Kate Moran',
-#     'Christina Joslin',
-#     'KUNMING SHAO',
-#     'Yihao Chen',
-#     'Vlada Volyanskaya',
-#     'Thomas',
-#     'Lucas M.',
-#     'Jessica Veenstra',
-#     'Maddie Ransford',
-#     'Michael Cheng',
-#     'Michael Hansen',
-#     'Alma Lopez Linan',
-#     'Nicole Balog',
-#     'Eunjae Choi',
-#     'Ethan Potter',
-#     'Kendalyn Fruehauf',
-#     'Onni',
-#     'David Park',
-#     'Zainub',
-#     'nathan',
-#     'Toby',
-#     'Kyle Andrew Janda',
-#     'Danny G',
-#     'Will Evans',
-#     'Gannon Rice',
-#     'William Stevens',
-#     'Yunlin Zhang',
-#     'Colin Mackenzie',
-#     'Andrew',
-#     'Max Kushner',
-#     'Matthew Pearce',
-#     'Yiyuan Z',
-#     'DBationo (db)',
-#     'Secret Marina Permenter',
-#     'Jacob Aldridge',
-#     'Andrew Liu',
-#     'Ziang Chen',
-#     'Tobias Bautista',
-#     'Maria Paula Armenta',
-#     'Erik Ohst',
-#     'Ivan Yezhov (иван ежов)',
-#     'Cheng Xin',
-#     'kunming',
-#     'Lareina Gu',
-#     'Shadwa Eldosuky'
-# ]
+
 
 excelNames = [*set(excelNamesUnfiltered)
                 ]  # only unique values from excel names
 
-splitNames = []
 
-def find_greater(a, b):
-    if (len(a) > len(b)):
-        return a
-    else:
-        return b
 
-def find_smaller(a, b):
-    if (len(a) > len(b)):
-        return b
-    else:
-        return a
 
 KeyValues = {"Matches": {}, "Partial Matches": {}}
 
-def matchArgs(arg1, arg2):
-    if ((arg2 in arg1) or (arg1 in arg2)):
-        return True
 
-def find_matches(index):
-    rfirst = []
-    rlast = []
 
-    for i in range(0, len(splitNames)):
+def cosine_similarity(s1, s2):
+    """Calculate the cosine similarity of two strings
 
-        for j in gNames["last"]:
+    Args:
+        s1 (string): gName first + last value
+        s2 (_type_): Excel Value
 
-            if (matchArgs(gNames["first"][j].lower(),
-                            splitNames[i].lower()) == True):
+    Returns:
+        int: similarity from 0 to 1
+    """
+    vec1 = {c: s1.count(c) for c in set(s1)}
+    vec2 = {c: s2.count(c) for c in set(s2)}
+    dot_product = sum(vec1[c] * vec2.get(c, 0) for c in vec1)
+    norm1 = math.sqrt(sum(v ** 2 for v in vec1.values()))
+    norm2 = math.sqrt(sum(v ** 2 for v in vec2.values()))
+    return dot_product / (norm1 * norm2)
 
-                rfirst.append(j)
 
-            if (matchArgs(gNames["last"][j].lower(),
-                            splitNames[i].lower()) == True):
+def find_matches(baseVal):
+    """Uses the cosine similarity to calculate string similarity
 
-                rlast.append(j)
-
-    return rfirst, rlast
-
-for index in range(0, len(excelNames)):
-    splitNames = excelNames[index].split()
-    listFirst, listLast = find_matches(index)
-    smallerList = find_smaller(listFirst, listLast)
-    greaterList = find_greater(listFirst, listLast)
-
-    for number in greaterList:
-        if (number in smallerList):
-            if (index in KeyValues["Matches"].keys()):
-                KeyValues["Matches"][index].append(number)
-            else:
-
-                KeyValues["Matches"][index] = [number]
-
-        elif (index in KeyValues["Partial Matches"].keys()):
-            KeyValues["Partial Matches"][index].append(number)
-        else:
-
-            KeyValues["Partial Matches"][index] = [number]
+    Args:
+        baseVal float: minimum similarity for partial match
+    """
+    
+    maxNum = len(gNames["first"])
+    
+    
+    for i in range(0,maxNum):
+        for name in excelNames:
+            real = f"{gNames['first'][i]} {gNames['last'][i]}"
+            similarity = cosine_similarity(real.lower().strip(), name.lower().strip())
+            
+            if similarity >= baseVal :
+                if similarity > 0.92:
+                    
+                    KeyValues["Matches"].setdefault(i, []).append(excelNames.index(name))
+                    
+                else:
+                   
+                    KeyValues["Partial Matches"].setdefault(i, []).append(excelNames.index(name))
+                
+            
+                    
+    
+                    
+            
+            
+            
+            
+    
+    
+        
 
 def lxt(index):
     """Converts IDs from a list to table with first and last names
@@ -179,40 +120,51 @@ def show_results():
     """ 
     Add values to the perfect match table 
     """
-    for i in KeyValues["Matches"]:
-        for indexofarray in [*set(KeyValues["Matches"][i])]:
-            x.add_row([
-                indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray],
-                excelNames[i]
-            ])
-            final_list.append(indexofarray)
+    # values are index of gNames
+    for values in KeyValues["Matches"]:
+        matchedArrays  = KeyValues["Matches"][values]
+        for num in matchedArrays:
+            # iterate through list inside matched key and add to table
+            x.add_row([values, gNames["first"][values], gNames["last"][values],excelNames[num]])
+            final_list.append(values)
+            
 
     """
     Add values to the partial match table. Adds the ID, First Name, Last Name and Excel Names
     """
+    
+    for values in KeyValues["Partial Matches"]:
+        matchedArrays  = KeyValues["Partial Matches"][values]
+        for num in matchedArrays:
+            # iterate through list inside matched key and add to table
+            first = gNames["first"][values]
+            last = gNames["last"][values]
+            origN = f"{first} {last}"
+            macN = excelNames[num]
+            
+            
+            si = cosine_similarity(origN.lower().strip(), macN.lower().strip())
+            p.add_row([values, gNames["first"][values], gNames["last"][values],excelNames[num], si])
 
-    for i in KeyValues["Partial Matches"]:
-        for indexofarray in [*set(KeyValues["Partial Matches"][i])]:
-            p.add_row([
-                indexofarray, gNames["first"][indexofarray], gNames["last"][indexofarray],
-                excelNames[i]
-            ])
+
     x.sortby = "ID"
-    p.sortby = "ID"
+    p.sortby = "Similarity Index"
+    p.reversesort = True
     r = PrettyTable()
     r.field_names = ["🧮 Total perfect matches:", '{:0>2}'.format(
-        len(x.rows)), "⌛ Total partial matches:", '{:0>2}'.format(len(p.rows))]
+        len(final_list)), "⌛ Total partial matches:", '{:0>2}'.format(len(p.rows))]
 
-    # # Print perfect matches
-    # print(x.get_string())
-    # # Print Partial Matches
-    # print(p.get_string())
-    # # Print Results
-    # print(r.get_string())
+    # Print perfect matches
+    print(x.get_string())
+    # Print Partial Matches
+    print(p.get_string())
+    # Print Results
+    print(r.get_string())
+
+find_matches(0.701)
 
 show_results()
 dup_list = final_list.copy()
-# MVP working for deleting names
 row_count = len(x.rows)
 
 def update_list(func, amend_list):
