@@ -17,13 +17,12 @@ x.field_names = [
     "ID", "First Name", "Last Name", " ✅ Full Match"
 ]
 
-# Conducting a Literature Review 11/1/2022
 Scrape = scrape_names()
 First = Scrape[0]
 Last = Scrape[1]
 gNames = export_list(First, Last)
 
-print(gNames)
+
 
 # create list with excel names
 excelNamesUnfiltered  = read_file("Name (Original Name)", "./2.15.2023 Personal Branding.csv")
@@ -204,12 +203,12 @@ def show_results():
     r.field_names = ["🧮 Total perfect matches:", '{:0>2}'.format(
         len(x.rows)), "⌛ Total partial matches:", '{:0>2}'.format(len(p.rows))]
 
-    # Print perfect matches
-    print(x.get_string())
-    # Print Partial Matches
-    print(p.get_string())
-    # Print Results
-    print(r.get_string())
+    # # Print perfect matches
+    # print(x.get_string())
+    # # Print Partial Matches
+    # print(p.get_string())
+    # # Print Results
+    # print(r.get_string())
 
 show_results()
 dup_list = final_list.copy()
