@@ -4,20 +4,20 @@
 - make a file?
 - object?
 - create a chache file
+- Make a log file _for debugging_
+- 
 
-- [ ] Fix partial and perfect matches **side quest**
-- [ ] Make a log file _for debugging_
-- [ ] `bug` Jacob A -> Check for duplicate names in full match
+# Bugs
 
-### Rework Attendance.py
+- multiple matches in perfect match
+  - Compare similarity and add highest one
+  - Move others to partial match and indicate
+- List edit not working??
 
-- Use regex
-- Results are not consistant
+# UI
 
----
-
-- [ ] Create a central file for all the links
-- [ ] Integrate Excel sheet name
+- Show if the partial match is already in perfect match
+- Flask or React
 
 ---
 
