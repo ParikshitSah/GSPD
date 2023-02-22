@@ -6,7 +6,7 @@ from post_attendance import mark_attendance
 
 def main():
     # Type list will be given to mark attendance
-    find_matches(0.701)
+    find_matches(0.801)
     show_results()
     result = make_final_list()
     table = lxt(result)
