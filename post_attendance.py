@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 import os
 import time
@@ -13,7 +15,7 @@ load_dotenv()  # for python-dotenv method
 
 def mark_attendance(ID):
 
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
     link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=4025&coursetype=0"
 
