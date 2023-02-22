@@ -8,8 +8,7 @@ import os
 import time
 from dotenv import load_dotenv  # for python-dotenv method
 from scrape import login
-
-
+from paras import  link
 load_dotenv()  # for python-dotenv method
 
 
@@ -17,7 +16,7 @@ def mark_attendance(ID):
 
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
-    link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=4025&coursetype=0"
+    
 
     login(driver)
     

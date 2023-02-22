@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-
+from paras import link, login_link
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
 load_dotenv()  # for python-dotenv method
@@ -18,7 +18,7 @@ load_dotenv()  # for python-dotenv method
 last_prompt = "//table/tbody/tr/td[2]//a"
 first_prompt = "//table/tbody/tr/td[3]//font"
 # Enter webpage link here
-link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=4025&coursetype=0"
+
 # link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=4056&coursetype=0"
 
 
@@ -55,7 +55,7 @@ def export_list(First_name, Last_name):
     return gNames
 
 def login(driver):
-    driver.get("http://gspd.gosignmeup.com/admin")
+    driver.get(login_link)
 
     # Find the username and password fields
     #Temporary Method to login > will probably make a branch and merge later

@@ -5,6 +5,7 @@ from scrape import export_list, scrape_names
 from user_pts import *
 from excel import read_file
 import math
+from paras import header_name, excelPath
 final_list = []
 
 
@@ -26,7 +27,7 @@ gNames = export_list(First, Last)
 
 
 # create list with excel names
-excelNamesUnfiltered  = read_file("Name (Original Name)", "./2.15.2023 Personal Branding.csv")
+excelNamesUnfiltered  = read_file(header_name, excelPath)
 
 
 excelNames = [*set(excelNamesUnfiltered)
@@ -161,9 +162,7 @@ def show_results():
     # Print Results
     print(r.get_string())
 
-find_matches(0.701)
 
-show_results()
 dup_list = final_list.copy()
 row_count = len(x.rows)
 
@@ -245,7 +244,7 @@ def make_final_list():
         print("Confirm Attendence? [y/n]")
         if (pyip.inputYesNo() == "yes"):
             print("confirmed")
-            return
+            return curr
         else:
             print("cancelled")
         return
