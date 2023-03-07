@@ -10,12 +10,10 @@
 # Bugs
 
 - multiple matches in perfect match
+
   - Compare similarity and add highest one
   - Move others to partial match and indicate
-- List edit not working??
-
-# UI
-
+- UI
 - Show if the partial match is already in perfect match
 - Flask or React
 
