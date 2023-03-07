@@ -6,7 +6,7 @@ from user_pts import *
 from excel import read_file
 import math
 from paras import header_name, excelPath
-final_list = []
+dup_list = final_list = []
 
 
 # Tetsung
@@ -128,6 +128,7 @@ def show_results():
             # iterate through list inside matched key and add to table
             x.add_row([values, gNames["first"][values], gNames["last"][values],excelNames[num]])
             final_list.append(values)
+            dup_list.append(values)
             
 
     """
@@ -163,10 +164,10 @@ def show_results():
     print(r.get_string())
 
 
-dup_list = final_list.copy()
+
 row_count = len(x.rows)
 
-def update_list(func, amend_list):
+def update_list(func, amend_list:list):
     """Calls function from user_pts.py to 
     add or delete values to the duplicate list
 
@@ -177,8 +178,9 @@ def update_list(func, amend_list):
     Returns:
         None: _description_
     """
-    
+    # get maximum array input number
     max_final_list = len(gNames['first'])
+    # ask user to enter list values 
     user_edit = get_list(max_final_list)
     for i in user_edit:
         if (func == "DEL"):
@@ -216,7 +218,8 @@ def change_list():
     # Deleting from the list
     elif (response == "Delete"):
         update_list("DEL", dup_list)
-
+        
+    # Restore orignal list
     elif (response == "Revert To Orignal List"):
         print("Confirm changes? All changes made will be lost")
         if pyip.inputYesNo() == 'yes':
@@ -224,40 +227,28 @@ def change_list():
         else:
             return dup_list
 
-    print("✅ Here's the final table select options below ✅")
-    print(lxt(dup_list)[0])
-    return dup_list
+    
+    print("change list: ✅ Here's the final table select options below ✅")
+    print(lxt(list(set(dup_list)))[0])
+    return list(set(dup_list))
 
 
 
 def make_final_list():
+    """Keeps asking for edit until user cancels or reverts
 
-    print("Make edits to the list [y/n]")
-    more_edits = pyip.inputYesNo()
-
-    curr = final_list.copy()
-
-    if (more_edits == "no"):
-        # confirm and push changes
-        print("✅ Here is the final list of attendes that will be marked ✅")
-        print(lxt(final_list)[0])
-        print("Confirm Attendence? [y/n]")
-        if (pyip.inputYesNo() == "yes"):
-            print("confirmed")
-            return curr
+    Returns:
+        list: list to be marked
+    """
+    # if no selected first time final list will be returned
+    res = [i for i in final_list]
+    while True:
+        cur = change_list()
+        if cur != 'exit':
+            res = cur
         else:
-            print("cancelled")
-        return
-    else:
-        # loop while user wants to no more make changes
+            return list(set(res))
+        
 
-        while more_edits == "yes":
-            run = change_list()
-            if (run == "exit"):
-                more_edits = "no"
-            else:
-                curr = run
-
-    return curr
 
 

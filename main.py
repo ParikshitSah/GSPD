@@ -6,12 +6,12 @@ from post_attendance import mark_attendance
 
 def main():
     # Type list will be given to mark attendance
-    find_matches(0.801)
+    find_matches(0.79)
     show_results()
     result = make_final_list()
     table = lxt(result)
     
-    # Print the final names that will be marked
+    # Print the final names that willy be marked
     print(table[0])
     # Print the total number of attendees
     print(table[1])
