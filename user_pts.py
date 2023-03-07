@@ -30,7 +30,7 @@ def list_delete(num, list):
     else:
         raise ValueError("Number already not in list or out of range")
     
-def list_add(num, list):
+def list_add(num:int, list:list):
     """adds number to the list
 
     Args:

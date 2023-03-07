@@ -165,7 +165,6 @@ def show_results():
 
 
 
-print("duplist:",dup_list)
 row_count = len(x.rows)
 
 def update_list(func, amend_list:list):
@@ -241,7 +240,8 @@ def make_final_list():
     Returns:
         list: list to be marked
     """
-    res = []
+    # if no selected first time final list will be returned
+    res = [i for i in final_list]
     while True:
         cur = change_list()
         if cur != 'exit':
