@@ -71,7 +71,7 @@ def find_matches(baseVal):
     for i in range(0,maxNum):
         for name in excelNames:
             real = f"{gNames['first'][i]} {gNames['last'][i]}"
-            similarity = cosine_similarity(real.lower().strip(), name.lower().strip())
+            similarity = cosine_similarity(str(real).lower().strip(), str(name).lower().strip())
             
             if similarity >= baseVal :
                 if similarity > 0.92:
@@ -216,7 +216,8 @@ def change_list():
     # Deleting from the list
     elif (response == "Delete"):
         update_list("DEL", dup_list)
-
+        
+    # Restore orignal list
     elif (response == "Revert To Orignal List"):
         print("Confirm changes? All changes made will be lost")
         if pyip.inputYesNo() == 'yes':
@@ -224,40 +225,22 @@ def change_list():
         else:
             return dup_list
 
-    print("✅ Here's the final table select options below ✅")
+    print("change list: ✅ Here's the final table select options below ✅")
     print(lxt(dup_list)[0])
     return dup_list
 
 
 
 def make_final_list():
-
-    print("Make edits to the list [y/n]")
-    more_edits = pyip.inputYesNo()
-
-    curr = final_list.copy()
-
-    if (more_edits == "no"):
-        # confirm and push changes
-        print("✅ Here is the final list of attendes that will be marked ✅")
-        print(lxt(final_list)[0])
-        print("Confirm Attendence? [y/n]")
-        if (pyip.inputYesNo() == "yes"):
-            print("confirmed")
-            return curr
+    
+    res = []
+    while True:
+        cur = change_list()
+        if cur != 'exit':
+            res = cur
         else:
-            print("cancelled")
-        return
-    else:
-        # loop while user wants to no more make changes
+            return res
+        
 
-        while more_edits == "yes":
-            run = change_list()
-            if (run == "exit"):
-                more_edits = "no"
-            else:
-                curr = run
-
-    return curr
 
 
