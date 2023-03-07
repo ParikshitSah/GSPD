@@ -1,18 +1,14 @@
 # Todos
 
-- Check and only scrape when dict is empty
-- make a file?
-- object?
 - create a chache file
 - Make a log file _for debugging_
-- 
+- ## Perfect and Partial Match Changes
+
+  - Should show at least one match for all excel names
+  - If name is already ``perfect matched`` then don't show in partial match > user will naturally delete name
 
 # Bugs
 
-- multiple matches in perfect match
-
-  - Compare similarity and add highest one
-  - Move others to partial match and indicate
 - UI
 - Show if the partial match is already in perfect match
 - Flask or React

@@ -241,7 +241,7 @@ def make_final_list():
         list: list to be marked
     """
     # if no selected first time final list will be returned
-    res = [i for i in final_list]
+    res = [i for i in dup_list]
     while True:
         cur = change_list()
         if cur != 'exit':
