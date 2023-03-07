@@ -6,7 +6,7 @@ from user_pts import *
 from excel import read_file
 import math
 from paras import header_name, excelPath
-final_list = []
+dup_list = final_list = []
 
 
 # Tetsung
@@ -128,6 +128,7 @@ def show_results():
             # iterate through list inside matched key and add to table
             x.add_row([values, gNames["first"][values], gNames["last"][values],excelNames[num]])
             final_list.append(values)
+            dup_list.append(values)
             
 
     """
@@ -163,10 +164,11 @@ def show_results():
     print(r.get_string())
 
 
-dup_list = final_list.copy()
+
+print("duplist:",dup_list)
 row_count = len(x.rows)
 
-def update_list(func, amend_list):
+def update_list(func, amend_list:list):
     """Calls function from user_pts.py to 
     add or delete values to the duplicate list
 
@@ -177,8 +179,9 @@ def update_list(func, amend_list):
     Returns:
         None: _description_
     """
-    
+    # get maximum array input number
     max_final_list = len(gNames['first'])
+    # ask user to enter list values 
     user_edit = get_list(max_final_list)
     for i in user_edit:
         if (func == "DEL"):
@@ -225,21 +228,26 @@ def change_list():
         else:
             return dup_list
 
+    
     print("change list: ✅ Here's the final table select options below ✅")
-    print(lxt(dup_list)[0])
-    return dup_list
+    print(lxt(list(set(dup_list)))[0])
+    return list(set(dup_list))
 
 
 
 def make_final_list():
-    
+    """Keeps asking for edit until user cancels or reverts
+
+    Returns:
+        list: list to be marked
+    """
     res = []
     while True:
         cur = change_list()
         if cur != 'exit':
             res = cur
         else:
-            return res
+            return list(set(res))
         
 
 
