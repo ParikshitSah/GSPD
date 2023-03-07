@@ -17,8 +17,11 @@ def read_file(column,path):
 
     # Extract the values from a specific column using the header name
     column_values = df[column].values
-
-    NamesExcel = [i for i in column_values]
+    
+    NamesExcel = []
+    for val in column_values:
+        if type(val) == str:
+            NamesExcel.append(val)
 
     # Return the column values
     print(NamesExcel)

@@ -71,7 +71,7 @@ def find_matches(baseVal):
     for i in range(0,maxNum):
         for name in excelNames:
             real = f"{gNames['first'][i]} {gNames['last'][i]}"
-            similarity = cosine_similarity(str(real).lower().strip(), str(name).lower().strip())
+            similarity = cosine_similarity(real.lower().strip(), name.lower().strip())
             
             if similarity >= baseVal :
                 if similarity > 0.92:
