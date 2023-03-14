@@ -5,6 +5,7 @@
 - ## Perfect and Partial Match Changes
 
   - Should show at least one match for all excel names
+  -  ``perfect match`` should have unique pairs
   - If name is already ``perfect matched`` then don't show in partial match > user will naturally delete name
 
 # Bugs
