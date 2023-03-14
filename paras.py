@@ -6,6 +6,6 @@ Workshop attendance and admin login link
 """
 
 login_link = "http://gspd.gosignmeup.com/admin"
-link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=4026&coursetype=0"
+link = "https://gspd.gosignmeup.com/admin/courses_attendance_detail.asp?cid=4027&coursetype=0"
 header_name = "Name (Original Name)"
-excelPath = "./2.22.2023 CV to Resume.csv"
+excelPath = "./3.1.2023 The Cover Letter.csv"
