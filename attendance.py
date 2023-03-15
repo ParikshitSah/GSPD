@@ -58,14 +58,19 @@ def cosine_similarity(s1, s2):
     return dot_product / (norm1 * norm2)
 
 
-def find_matches(baseVal):
+def find_matches(baseVal: float):
     """Uses the cosine similarity to calculate string similarity
+    and appends to KeyValues
 
     Args:
         baseVal float: minimum similarity for partial match
     """
 
     maxNum = len(gNames["first"])
+    
+    # For dynamic programming, hashing similarity values to save time when printing table
+    # TODO use a max heap with tuple (similarity, first + last name) and append to KeyValues -> Partial Matches
+    # TODO Store only max similarity in perfect matches and append other to partial matches
 
     for i in range(0, maxNum):
         for name in excelNames:
@@ -73,7 +78,8 @@ def find_matches(baseVal):
             similarity = cosine_similarity(real.lower().strip(), name.lower().strip())
 
             if similarity >= baseVal:
-                if similarity > 0.92:
+                if similarity > 0.92: # change to variable 
+                    
                     KeyValues["Matches"].setdefault(i, []).append(
                         excelNames.index(name)
                     )
